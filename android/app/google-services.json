@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358636688817",
+    "project_id": "bmarket-b690b",
+    "storage_bucket": "bmarket-b690b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358636688817:android:729a99b06e5dfb82089990",
+        "android_client_info": {
+          "package_name": "com.BMarket.BMT"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358636688817-av8qs4qv52pcku8shfbng7b4ot4ke5dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFAZh5GpsvdK-GXV9nnDvQN4Hvlia_x0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358636688817-av8qs4qv52pcku8shfbng7b4ot4ke5dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
