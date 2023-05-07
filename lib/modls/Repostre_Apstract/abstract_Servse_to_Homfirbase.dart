@@ -6,5 +6,5 @@ import '../inf_Reviews_M.dart';
 abstract class abstractHome {
   Future<List<Srvices>?> getAllService();
   Future<List<Reviews>?>getAllReviews(String idservice) ;
-  
+  Future getAllRatings(String userid);
   }

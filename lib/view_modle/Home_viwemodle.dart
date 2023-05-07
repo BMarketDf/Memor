@@ -3,7 +3,6 @@ import 'package:newproject/modls/Repostre_Apstract/abstract_Servse_to_Homfirbase
 import 'package:newproject/modls/Repostre_Apstract/abstract_user.dart';
 import 'package:newproject/modls/inf_Reviews_M.dart';
 import 'package:newproject/modls/inf_Srvice_M.dart';
-import 'package:newproject/modls/srvise/firbase_Servse_to_Hom.dart';
 
 class homeviwemodle extends ChangeNotifier {
   abstractHome? abstrecthome;
@@ -14,7 +13,7 @@ class homeviwemodle extends ChangeNotifier {
     List<Srvices>? listsrvices =
         (await abstrecthome!.getAllService())!.toList();
     listsrvices.map((servis) => (getservisVM(srvis: servis))).toList();
-    ChangeNotifier();
+    ChangeNotifier(); /// fonction update data 
     return listsrvices;
   }
 

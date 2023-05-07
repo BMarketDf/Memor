@@ -30,6 +30,11 @@ class HomeModlefirbase extends abstractHome {
     });
     return dataReviews;
   }
+  @override
+  Future getAllRatings(String userid) async {
+    
+    
+  }
 }
 
 

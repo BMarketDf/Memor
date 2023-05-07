@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class Users {
   String? uid;
   String? password;
@@ -43,11 +45,8 @@ class Users {
     };
   }
 }
-
 class Userviwemodle {
   Users? User;
-
-  var length;
   Userviwemodle({this.User});
   get uid => User?.uid;
   get Date => User?.Date;

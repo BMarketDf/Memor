@@ -1,4 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:developer';
+import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +12,8 @@ import 'package:newproject/modls/inf_Srvice_M.dart';
 
 import '../../CatchErer.dart';
 import '../inf_User_M.dart';
+import '../inf_order_M.dart';
+import '../inf_Ratings_M.dart';
 
 class Auth extends abstractuser {
   List<Users> myusers = [];
@@ -209,6 +214,30 @@ class Auth extends abstractuser {
       return ret;
 
   }
-
-
+  // Order by Service in crante user 
+  @override
+  Future OrderbyService(order newOrder) async {
+          try {
+         DocumentReference idrefrence= Instencefirbsefirstor.collection("Services").doc(newOrder.userid).collection("Order").doc();
+            newOrder.id=idrefrence.id;
+           await  idrefrence.set(newOrder);
+          } catch (e) {
+                       return e;
+          }  
+  }
+  // khce code vwie Modle 
+  @override
+  Future reveiousorder(String id,String idservice) async {
+    DocumentReference deleteOrder= Instencefirbsefirstor.collection("Services").doc(idservice).collection("Order").doc(id);
+    if (deleteOrder!=null) {
+      await  deleteOrder.delete();
+    }
+   }
+   //add Rating to user 
+   @override
+  Future addRating(RatingsM infRating) async {
+    DocumentReference addRating = await Instencefirbsefirstor.collection("Users").doc(infRating.userid).collection("Ratings").doc();
+       infRating.id= addRating.id ;
+       await  addRating.set(infRating);  
+       }
 }
