@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:newproject/modls/srvise/firbase_Servse_to_Hom.dart';
 import 'dart:io';
+
+import 'package:newproject/modls/srvise/user_serviceFirbase.dart';
 
 class Note extends StatefulWidget {
   const Note({super.key});
@@ -25,18 +28,12 @@ class _NoteState extends State<Note> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // body: StreamBuilder(
-        //     stream:,
-        //     builder: (context, snapshot) =>
-        body: Center(
-            child: SizedBox(
-                height: double.infinity,
-                child: checkInternetConnection() == false
-                    ? const Text("non conection ")
-                    : const Text(
-                        "Note",
-                        style: TextStyle(fontSize: 60),
-                      ))));
-    //);
-  }
-}
+            body: Center(
+            child: ElevatedButton(onPressed: (){ HomeModlefirbase().getMoyneRatings("+213656656969");
+            
+            }, child: Text("Test")
+            
+            )));
+                            
+            
+    }}

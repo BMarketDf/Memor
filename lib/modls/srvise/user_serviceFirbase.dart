@@ -1,8 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:developer';
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -237,7 +234,7 @@ class Auth extends abstractuser {
    @override
   Future addRating(RatingsM infRating) async {
     DocumentReference addRating = await Instencefirbsefirstor.collection("Users").doc(infRating.userid).collection("Ratings").doc();
-       infRating.id= addRating.id ;
+       infRating.id= addRating.id;
        await  addRating.set(infRating);  
        }
 }
