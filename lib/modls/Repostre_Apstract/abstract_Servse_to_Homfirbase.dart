@@ -8,4 +8,5 @@ abstract class abstractHome {
   Future<List<Srvices>?> getAllService();
   Future<List<Reviews>?>getAllReviews(String idservice) ;
   Future<double> getMoyneRatings(String userid);
+  Future getMasseg(String id );
   }

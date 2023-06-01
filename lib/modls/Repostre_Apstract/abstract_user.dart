@@ -1,4 +1,5 @@
 import 'package:newproject/modls/inf_Reviews_M.dart';
+import 'package:newproject/modls/inf_massegs_M.dart';
 import 'package:newproject/modls/inf_order_M.dart';
 import 'package:newproject/modls/inf_Ratings_M.dart';
 
@@ -22,7 +23,7 @@ abstract class abstractuser {
   Future OrderbyService(order newOrder);
   Future reveiousorder(String idm,String idservice );
   Future addRating(RatingsM  infRating);
-
+  Future addMassge(Massegs massegs);  
 
 
 }

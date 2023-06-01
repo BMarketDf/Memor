@@ -9,6 +9,7 @@ import 'package:newproject/page/First.dart';
 import 'package:newproject/page/Login.dart';
 import 'package:newproject/page/Sing.dart';
 import 'package:newproject/page/Swit.dart';
+import 'package:newproject/page/masseg.dart';
 
 bool? islogin;
 void main() async {
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
         '/Done': (context) => const Done(),
         '/Swit': (context) => const Swit(),
         '/Det': (context) => const Det(),
-        '/Dommend': (context) => const Dommend(),
+        '/Dommend': (context) => const Dommend(), 
+        '/masseg': (context) => masseg(),
       },
     );
   }

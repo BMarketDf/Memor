@@ -3,7 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'Home.dart';
 import 'Maps.dart';
-import 'Mas.dart';
+import 'Massegs.dart';
 import 'Note.dart';
 import 'Profile.dart';
 

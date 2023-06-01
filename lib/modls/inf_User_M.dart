@@ -23,8 +23,8 @@ class Users {
       this.Username,
       this.imgeurl});
   //convart json to map dart
-  Users.fromjson(Map<String, dynamic> json) {
-    uid = json["uid"];
+  Users.fromjson(Map<String, dynamic>? json) {
+    uid = json!["uid"];
     Date = json["Date"];
     address = json["address"];
     phone = json["phone"];

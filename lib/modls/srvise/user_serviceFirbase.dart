@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:newproject/modls/Repostre_Apstract/abstract_user.dart';
 import 'package:newproject/modls/inf_Reviews_M.dart';
 import 'package:newproject/modls/inf_Srvice_M.dart';
+import 'package:newproject/modls/inf_massegs_M.dart';
+import 'package:newproject/page/masseg.dart';
 
 import '../../CatchErer.dart';
 import '../inf_User_M.dart';
@@ -217,7 +219,7 @@ class Auth extends abstractuser {
           try {
          DocumentReference idrefrence= Instencefirbsefirstor.collection("Services").doc(newOrder.userid).collection("Order").doc();
             newOrder.id=idrefrence.id;
-           await  idrefrence.set(newOrder);
+           await  idrefrence.set(newOrder.tojson());
           } catch (e) {
                        return e;
           }  
@@ -235,6 +237,19 @@ class Auth extends abstractuser {
   Future addRating(RatingsM infRating) async {
     DocumentReference addRating = await Instencefirbsefirstor.collection("Users").doc(infRating.userid).collection("Ratings").doc();
        infRating.id= addRating.id;
-       await  addRating.set(infRating);  
-       }
+       await  addRating.set(infRating.json());  
+  }
+         @override
+         Future addMassge(Massegs massegs) async {
+           try {
+         DocumentReference  Masseg=  Instencefirbsefirstor.collection("Massegs").doc();
+        //  DocumentReference  chat=  Instencefirbsefirstor.collection("chat").doc();
+        //مزالي كيفاه ينشاء محادثة  
+        ////نديرها كي يدير طلب تتنشاء محادثة 
+        ////حليا نديرها مانيال  
+           massegs.id=Masseg.id;
+            await Masseg.set(massegs.tojson());
+          } catch (e) {
+          }
+         }
 }

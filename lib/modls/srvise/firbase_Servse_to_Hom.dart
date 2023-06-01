@@ -3,6 +3,7 @@ import 'package:newproject/modls/Repostre_Apstract/abstract_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:newproject/modls/inf_Ratings_M.dart';
 import 'package:newproject/modls/inf_Reviews_M.dart';
+import 'package:newproject/modls/inf_massegs_M.dart';
 
 import '../inf_Srvice_M.dart';
 
@@ -57,11 +58,22 @@ try {
  }
       return Moyne;  
   }
+  
+  @override
+  Future getMasseg(String id)async  {
+       List massegs=[];
+try{
+// int length= await constent.collection("Users").doc(id).collection("Massegs").snapshots().length;
+//     m.forEach((element) { 
+//                  print("dddddddd");
+//        for (var element in element.docs) {
+//          massegs.add(Massegs.fromjson(element.data()));
+
+//        }
+//     });
+  
   }
+catch (e) {}
 
-  
-    
-  
-
-
+  }}
 
