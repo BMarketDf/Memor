@@ -19,8 +19,46 @@ class massegsWidge{
          final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
          Massegs Addmasseg =Massegs();
          massegsWidge({required this.Addmasseg});
+ 
+   allertSyalouug(context,Massegs geTaype){
+    showDialog(
+             context:context,
+          builder: (context) =>  AlertDialog(
+              title:Column(
+                children: [
+                 const Text("هل تريد حذف الرسالة "),
+                   Row(
+                   children:[
+                    TextButton(onPressed: (){
+                   deletimage(context,geTaype);   
+                           Navigator.pop(context);               //يوجد خطا في هذه الدالة
+              }, child:const Text("نعم ")),
+              TextButton(onPressed: (){
+                Navigator.pop(context);
+              }, child:const Text(" لا ")),
+                  ] )  ],
+              ) ,
+            ));
+   }    
+          deletimage(context,Massegs remove) async{
+            bool isdelete=false;
+                  //يوجد خطا في هذه الدالة
+                String deleteUrlImage=remove.masseg.toString() ;
+                  //  isdelete=
+                     await Auth().deletMassge(remove.id)  ;
+                        await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                                            conste().snakepare("تم حدف الصورة ", context);
+                //   if (isdelete) {
+                //     await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                //     conste().snakepare("تم حدف الصورة ", context);
+                //  }
+                //  else{
+                //    print("فشل الحذف ");
+                //    conste().snakepare("تعذر حذف الصورة!  ",context);}
+                }
+
          ///رفع الصورة كمن الكاميرا او المعرض 
-     Uploudfile(XFile image)async {
+       Uploudfile(XFile image)async {
               File file =File(image.path);
               String nameimage=basename(image.path);
               var refrehce=FirebaseStorage.instance.ref("imagaeChatMassegs/$nameimage");
@@ -53,22 +91,20 @@ class massegsWidge{
                                          }, icon: const Icon(Icons.send,
                                   color:Colors.blue,
                                   size: 30,
-                                  )),
-                                ],
-                              )
-                              ]),
-       );
-       }
-    );    
-  }
+                                  )),],)]), ); });}//new fonction
 
-  //new fonction 
-        Widget shwoData(Massegs gettype,context){
+           Widget shwoData(Massegs gettype,context){
             switch (gettype.Taype) {
               case "Text":
+                            // if (currentUser==gettype.idusersender) {
+
+              return GestureDetector(
+   
+                child: Text("${gettype.masseg}",style:  const TextStyle( 
+                             color: Color.fromARGB(255, 236, 228, 228),
+                      ),),
+                                        onLongPress: (){
                 if (currentUser==gettype.idusersender) {
-              return InkWell(
-                  onTap: (){
                       showDialog(
                context:context,
                builder: (context) =>  AlertDialog(
@@ -85,24 +121,25 @@ class massegsWidge{
               TextButton(onPressed: (){
                 Navigator.pop(context);
               },
-             child:const Text(" لا ")), ])  ],), ));    },      
-                child: Text("${gettype.masseg}",style:  const TextStyle( 
-                             color: Color.fromARGB(255, 236, 228, 228),
-                      ),),
-);
-          } 
+                 child:const Text(" لا ")), ])  ],), ));
+                 } 
+                 }  
+             
+                      );
+     
           ///if loula tkmle hna 
-              else {
-                  return Text("${gettype.masseg}",style: const  TextStyle( 
-                                     color:Colors.black,),); 
-                                     }
-                // break;
-              default:
-                    return InkWell(
-                onTap: (){
-               Navigator.push( context, MaterialPageRoute(builder:(context) 
-               => ShowImge(urlimge: gettype,)));
-                },
+              // else {
+              //     return Text("${gettype.masseg}",style: const  TextStyle( 
+              //                        color:Colors.black,),); 
+              //                        }
+                
+                              default:
+                    return GestureDetector(
+                      onLongPress: () {
+                    if (currentUser==gettype.idusersender) {  allertSyalouug(context,gettype);  } },
+                 onTap: (){
+                Navigator.push( context, MaterialPageRoute(builder:(context) 
+                => ShowImge(urlimge: gettype,)));      },
                 child: ClipRRect(
                        borderRadius: BorderRadius.circular(20), 
                   child: CachedNetworkImage(
@@ -112,11 +149,7 @@ class massegsWidge{
                     placeholder:(context,url)=> const Center(child: CircularProgressIndicator()),
                            imageBuilder: (context, imageProvider) =>Image(image: imageProvider,
                             fit: BoxFit.scaleDown,
-                           ), 
-                  ),
-                ),
-              );
+                           ), ),), );
            
-            }
-           }
-}
+            }}
+}//lescpolad in class

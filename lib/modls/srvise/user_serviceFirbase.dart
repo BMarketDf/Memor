@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:newproject/modls/Repostre_Apstract/abstract_user.dart';
 import 'package:newproject/modls/inf_Reviews_M.dart';
 import 'package:newproject/modls/inf_Srvice_M.dart';
@@ -269,7 +270,7 @@ class Auth extends abstractuser {
              @override
              Future deleteimagrinfirestore(String? pathe)async  {
              try {
-                  await FirebaseStorage.instance.ref(pathe).delete();
+                  await FirebaseStorage.instance.ref(pathe).delete().catchError(  (error) => print("+++++++++++++$error"));
               // ignore: empty_catches
           } catch (e) {
            print("non delete imge");

@@ -99,6 +99,7 @@ class _massegState extends State<masseg> {
 
                   ),
                    child:
+                    //  massegsWidge(Addmasseg: Addmasseg)
                    massegsWidge(Addmasseg: Addmasseg).shwoData(massegs[index],this.context),
                   ),
             ],
@@ -168,7 +169,9 @@ class _massegState extends State<masseg> {
                     onPressed:() async{
                             image= await uploudimage.pickImage(source: ImageSource.gallery);
                    if (image!=null) {
-                     massegsWidge(Addmasseg: Addmasseg).showimge(image!,this.context); }
+                
+                      massegsWidge(Addmasseg: Addmasseg).showimge(image!,this.context);
+                       }
                 },
                icon: const Icon(Icons.wallpaper))
             ]),

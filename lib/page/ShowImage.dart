@@ -19,17 +19,16 @@ class _ShowImgeState extends State<ShowImge> {
                 deletimage(context) async{
                   //يوجد خطا في هذه الدالة
                   String deleteUrlImage=widget.urlimge.masseg.toString() ;
-                //  Navigator.pushNamedAndRemoveUntil(context, "/masseg", (route) => false);
                  Navigator.of(context).pop();
-                isdelete=  await Auth().deletMassge(widget.urlimge.id)  ;
-                  if (isdelete) {
-                 await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                // isdelete=  await Auth().deletMassge(widget.urlimge.id)  ;
+                  // if (isdelete) {
+                        await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                         isdelete=  await Auth().deletMassge(widget.urlimge.id)  ;
                     conste().snakepare("تم حدف الصورة ", context);
-                 }else{
+                //  }else{
                    print("فشل الحذف ");
-                  conste().snakepare("تعذر حذف الصورة!  ",context);}
-                       }
-
+                   conste().snakepare("تعذر حذف الصورة!  ",context);}
+                      //  }
      @override
       Widget build(BuildContext context) => Scaffold(
        backgroundColor: Colors.black,
