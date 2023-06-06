@@ -17,8 +17,9 @@ import '../modls/srvise/firbase_Servse_to_Hom.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path/path.dart';
-
 import 'Widgemethoudmassegs.dart';
+// حمد currentUser راه هو الاميل لر نني خادم بيه 
+// ونتاراك داير id   ملا بدلوا 
 class masseg extends StatefulWidget {
     chat ? massg;
     Users ? User;
@@ -29,7 +30,7 @@ class masseg extends StatefulWidget {
 }
 class _massegState extends State<masseg> {
      Massegs Addmasseg =Massegs();
-    final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
+    final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();///بدلوا بالايدي 
      final GlobalKey<FormState> _glonlfey = GlobalKey<FormState>();
       final constent = FirebaseFirestore.instance;
         final controler= TextEditingController();

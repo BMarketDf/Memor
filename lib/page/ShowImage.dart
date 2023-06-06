@@ -15,49 +15,9 @@ class ShowImge extends StatefulWidget {
 }
 class _ShowImgeState extends State<ShowImge> {
      final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
-          bool isdelete=false;
-                deletimage(context) async{
-                  //يوجد خطا في هذه الدالة
-                  String deleteUrlImage=widget.urlimge.masseg.toString() ;
-                 Navigator.of(context).pop();
-                // isdelete=  await Auth().deletMassge(widget.urlimge.id)  ;
-                  // if (isdelete) {
-                        await  Auth().deleteimagrinfirestore(deleteUrlImage);
-                         isdelete=  await Auth().deletMassge(widget.urlimge.id)  ;
-                    conste().snakepare("تم حدف الصورة ", context);
-                //  }else{
-                   print("فشل الحذف ");
-                   conste().snakepare("تعذر حذف الصورة!  ",context);}
-                      //  }
      @override
       Widget build(BuildContext context) => Scaffold(
        backgroundColor: Colors.black,
-       appBar: AppBar( 
-       title: Visibility(
-       visible: widget.urlimge.idusersender==currentUser?true:false,
-         child: IconButton(onPressed: (){
-              showDialog(
-             context:context,
-          builder: (context) =>  AlertDialog(
-              title:Column(
-                children: [
-                 const Text("هل تريد حذف الرسالة "),
-                   Row(
-                   children:[
-                    TextButton(onPressed: (){
-                    Navigator.pop(context);
-                   deletimage(context);                  //يوجد خطا في هذه الدالة
-
-              }, child:const Text("نعم ")),
-              TextButton(onPressed: (){
-                Navigator.pop(context);
-              }, child:const Text(" لا ")),
-                  ] )  ],
-              ) ,
-            ));
-          }, icon: const Icon(Icons.delete)),
-       ),
-       ),
      body: 
          Padding(
            padding: const EdgeInsets.only(left: 3,right: 3),

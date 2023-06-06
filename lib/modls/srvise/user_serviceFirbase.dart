@@ -270,7 +270,7 @@ class Auth extends abstractuser {
              @override
              Future deleteimagrinfirestore(String? pathe)async  {
              try {
-                  await FirebaseStorage.instance.ref(pathe).delete().catchError(  (error) => print("+++++++++++++$error"));
+                  await FirebaseStorage.instance.refFromURL(pathe!).delete().catchError(  (error) => print("+++++++++++++$error"));
               // ignore: empty_catches
           } catch (e) {
            print("non delete imge");

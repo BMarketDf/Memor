@@ -35,30 +35,20 @@ class massegsWidge{
               }, child:const Text("نعم ")),
               TextButton(onPressed: (){
                 Navigator.pop(context);
-              }, child:const Text(" لا ")),
-                  ] )  ],
-              ) ,
-            ));
-   }    
+              }, child:const Text(" لا ")),] )  ],) ,));}    
           deletimage(context,Massegs remove) async{
             bool isdelete=false;
-                  //يوجد خطا في هذه الدالة
-                String deleteUrlImage=remove.masseg.toString() ;
-                  //  isdelete=
-                     await Auth().deletMassge(remove.id)  ;
-                        await  Auth().deleteimagrinfirestore(deleteUrlImage);
-                                            conste().snakepare("تم حدف الصورة ", context);
-                //   if (isdelete) {
-                //     await  Auth().deleteimagrinfirestore(deleteUrlImage);
-                //     conste().snakepare("تم حدف الصورة ", context);
-                //  }
-                //  else{
-                //    print("فشل الحذف ");
-                //    conste().snakepare("تعذر حذف الصورة!  ",context);}
-                }
 
+                String deleteUrlImage=remove.masseg.toString() ;
+              isdelete=await Auth().deletMassge(remove.id)  ;
+                  if (isdelete) {
+                     Navigator.pop(context);
+                    conste().snakepare("تم حدف الصورة ", context); 
+                    await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                  }
+                 else{conste().snakepare("تعذر حذف الصورة!  ",context);}}
          ///رفع الصورة كمن الكاميرا او المعرض 
-       Uploudfile(XFile image)async {
+          Uploudfile(XFile image)async {
               File file =File(image.path);
               String nameimage=basename(image.path);
               var refrehce=FirebaseStorage.instance.ref("imagaeChatMassegs/$nameimage");
