@@ -156,26 +156,26 @@ class _HomeState extends State<Home> {
                         //     ),
                         //   ),
                         // ),
-                        FutureBuilder(
-                            future: homes.fechAllservice(),
-                            builder: (context, snapshot) {
-                              return !snapshot.hasData
-                                  ? const  Center(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : SizedBox(
-                                      height: 90,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: snapshot.data!.length,
-                                        itemBuilder: (context, index) {
-                                          return getuseraddservice(snapshot
-                                              .data![index].userid
-                                              .toString());
-                                        },
-                                      ),
-                                    );
-                            }),
+                        // FutureBuilder(
+                        //     future: homes.fechAllservice(),
+                        //     builder: (context, snapshot) {
+                        //       return !snapshot.hasData
+                        //           ? const  Center(
+                        //               child: CircularProgressIndicator(),
+                        //             )
+                        //           : SizedBox(
+                        //               height: 90,
+                        //               child: ListView.builder(
+                        //                 scrollDirection: Axis.horizontal,
+                        //                 itemCount: snapshot.data!.length,
+                        //                 itemBuilder: (context, index) {
+                        //                   return getuseraddservice(snapshot
+                        //                       .data![index].userid
+                        //                       .toString());
+                        //                 },
+                        //               ),
+                        //             );
+                        //     }),
                         Container(
                           width: double.infinity,
                           height: 190,

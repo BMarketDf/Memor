@@ -13,7 +13,7 @@ class cathe {
   cercoularindecatercenter(context) {
     showDialog(
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (context) => const  AlertDialog(
               title: Center(
                 child: CircularProgressIndicator(),
               ),

@@ -8,21 +8,21 @@ import 'package:newproject/modls/inf_Reviews_M.dart';
 import 'package:newproject/modls/inf_Srvice_M.dart';
 import 'package:newproject/modls/inf_massegs_M.dart';
 import 'package:newproject/page/masseg.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import '../../CatchErer.dart';
 import '../inf_User_M.dart';
 import '../inf_order_M.dart';
 import '../inf_Ratings_M.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path/path.dart';
 
 class Auth extends abstractuser {
   List<Users> myusers = [];
   Users myuser = Users();
        DocumentReference? rsponce ;
-
-
   final FirebaseAuth FirebaseA = FirebaseAuth.instance;
         var Instencefirbsefirstor=  FirebaseFirestore.instance;
-
 
   ///SIGN UP  wht email and passeord
   @override
@@ -238,7 +238,7 @@ class Auth extends abstractuser {
     DocumentReference addRating = await Instencefirbsefirstor.collection("Users").doc(infRating.userid).collection("Ratings").doc();
        infRating.id= addRating.id;
        await  addRating.set(infRating.json());  
-  }
+    }
          @override
          Future addMassge(Massegs massegs) async {
            try {
@@ -247,9 +247,34 @@ class Auth extends abstractuser {
         //مزالي كيفاه ينشاء محادثة  
         ////نديرها كي يدير طلب تتنشاء محادثة 
         ////حليا نديرها مانيال  
-           massegs.id=Masseg.id;
+            massegs.id=Masseg.id;
+          
             await Masseg.set(massegs.tojson());
+          // ignore: empty_catches
           } catch (e) {
           }
-         }
+         }  
+           @override
+           deletMassge(String ?idmasseg) async {
+                          bool isdelete=false;
+         try {
+                var delet =Instencefirbsefirstor.collection("Massegs").doc(idmasseg);
+            if(delet!=null){
+              await delet.delete();
+              isdelete=true;
+            }
+         } catch (e) {}
+           return isdelete;
+
+           }
+           
+             @override
+             Future deleteimagrinfirestore(String? pathe)async  {
+             try {
+                  await FirebaseStorage.instance.ref(pathe).delete();
+              // ignore: empty_catches
+          } catch (e) {
+        print("non delete imge");
+       }
+             }
 }

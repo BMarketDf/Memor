@@ -16,15 +16,11 @@ class Mas extends StatefulWidget {
 class _MasState extends State<Mas> {
     final constent = FirebaseFirestore.instance;
     final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
-     // ignore: non_constant_identifier_names
-      Users ListUses=Users();
-     // ignore: non_constant_identifier_names
-     
   Widget body(chat chat){
-
+      // ignore: non_constant_identifier_names
+      Users ListUses=Users();
     return  StreamBuilder(
-      stream: constent.collection("Users").doc(chat.idUser).snapshots(),
-      // .where("uid",isEqualTo: chat.idusersender)
+      stream: constent.collection("Users").doc(chat.idusersender).snapshots(),
       builder:(context, snapshot) { 
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator(),);
@@ -48,7 +44,7 @@ class _MasState extends State<Mas> {
                         right: 0,
                         bottom: 0,
                         child:Container(height: 12,
-                      width: 12,
+                       width: 12,
                       decoration: const BoxDecoration(
                          color:Color(0xFF00BF6D),
                          shape: BoxShape.circle
@@ -109,9 +105,10 @@ class _MasState extends State<Mas> {
         ],
       ),
     body: StreamBuilder(
-      stream: constent.collection("Chat").where("idusersender",isEqualTo: currentUser).snapshots(),
-      builder:(context, snapshot){ 
-                 List<chat> ListChat=[];
+      stream: constent.collection("Chat").where("idUser",isEqualTo: currentUser).snapshots(),
+      builder:(context, snapshot){
+         // ignore: non_constant_identifier_names
+         List<chat> ListChat=[];
         if(!snapshot.hasData){
              return const Center(child: CircularProgressIndicator(),);
         }
@@ -119,9 +116,7 @@ class _MasState extends State<Mas> {
               ListChat.add(chat.fromjson(element.data()));
                 }
          return  Column(children: [
-        Expanded(child:
-
-                ListView.builder(
+        Expanded(child: ListView.builder(
                itemCount: ListChat.length,
               itemBuilder: (context, index) {
                 return ListChat.isEmpty? const Center(child: Text("non Chat"),):body(ListChat[index]);

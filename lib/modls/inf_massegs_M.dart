@@ -4,11 +4,13 @@ class Massegs {
   String? idUser;
   String? idusersender;
   String? idChat;
+  String? Taype;
   DateTime ? datnow;
     Massegs({
       this.id,
       this.idusersender,
       this.idUser,
+      this.Taype,
       this.idChat,
       this.masseg,
       this.datnow,
@@ -18,6 +20,7 @@ class Massegs {
         id = json["id"];
         idusersender = json["idusersender"];
         idUser = json["idUser"];
+        Taype = json["Taype"];
         idChat = json["idChat"];
         masseg = json["masseg"];
         datnow = json["datnow"].toDate() ;
@@ -27,6 +30,7 @@ class Massegs {
       "id": id,
       "idusersender": idusersender,
       "idUser":idUser,
+      "Taype":Taype,
       "idChat":idChat,
       "masseg": masseg,
       "datnow": datnow,

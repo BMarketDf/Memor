@@ -5,7 +5,8 @@ import 'package:newproject/modls/inf_Ratings_M.dart';
 
 import '../inf_Srvice_M.dart';
 import '../inf_User_M.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 // ignore: camel_case_types
 abstract class abstractuser {
   Future signupWhtEmailAndPassword(    String Email, String password, Users addusr, context);
@@ -23,7 +24,10 @@ abstract class abstractuser {
   Future OrderbyService(order newOrder);
   Future reveiousorder(String idm,String idservice );
   Future addRating(RatingsM  infRating);
-  Future addMassge(Massegs massegs);  
+  Future addMassge(Massegs massegs,);  
+   Future<bool> deletMassge(String? idmasseg,);  
+  Future deleteimagrinfirestore(String? pathe,);  
+  
 
 
 }

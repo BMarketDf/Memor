@@ -1,16 +1,24 @@
 
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:newproject/modls/inf_User_M.dart';
 import 'package:newproject/modls/inf_chat_M.dart';
 import 'package:newproject/modls/inf_massegs_M.dart';
 import 'package:newproject/modls/inf_massegs_M.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:newproject/modls/srvise/user_serviceFirbase.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:newproject/page/ShowImage.dart'; 
 import '../modls/srvise/firbase_Servse_to_Hom.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path/path.dart';
 
-
+import 'Widgemethoudmassegs.dart';
 class masseg extends StatefulWidget {
     chat ? massg;
     Users ? User;
@@ -18,25 +26,25 @@ class masseg extends StatefulWidget {
   }
   @override
   State<masseg> createState() => _massegState();
-  
 }
-
 class _massegState extends State<masseg> {
-  @override
-    
-  // void initState() {
-  //   // TODO: implement initState
-  //   getidchattheCurentUser();
-  // }
-  // String ?idchatUser;
-    final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
-    final GlobalKey<FormState> _glonlfey = GlobalKey<FormState>();
-        final constent = FirebaseFirestore.instance;
      Massegs Addmasseg =Massegs();
-    
-     
+    final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
+     final GlobalKey<FormState> _glonlfey = GlobalKey<FormState>();
+      final constent = FirebaseFirestore.instance;
+        final controler= TextEditingController();
+          bool isEmpty=false;
+        @override
+           void initState() {
+            setState(() {  isEmpty= controler.text.isEmpty;});
+             Addmasseg.idusersender=currentUser;
+             Addmasseg.idUser=widget.User!.uid;
+              super.initState();
+               }
    Widget Chatinputfiled(){
-     bool isEmpty=false;
+              ImagePicker uploudimage=ImagePicker();
+      XFile? image;
+      // String? pthimage;
   return StreamBuilder(
     //ا الستريم درتوا يجيب  المحادثة لي بعثها المستخدم  لي  لبززت عليها ويجيبلي المحدثة لبعثها الملبوز عليه  لل مستخدم لي داير تسجيل الدخول 
       stream:  constent.collection("Massegs").where("idusersender",isEqualTo:currentUser).where("idUser",isEqualTo: widget.User!.uid).snapshots() ,
@@ -54,65 +62,56 @@ class _massegState extends State<masseg> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const  Center(child: CircularProgressIndicator(),);
-          }
+          } 
           for (var element in snapshot.data!.docs) {
                      massegs.add(Massegs.fromjson(element.data()));
           }
-                       List m=["4","m","k","k","m","5","5"];
-                       print(m);
-          for(int i=0;i<m.length;i++){
-            for(int j=i+1;j<m.length;j++){
-              if(m[i]==m[j]){
-               m.removeAt(j);
-              }
-              print(m);
-              print("bachir");
-            }
-          }
+                       //  مسح التكرار 
           for(int i=0;i<massegs.length;i++){
             for(int j=i+1;j<massegs.length;j++){
               if(massegs[i].id==massegs[j].id){
                massegs.removeAt(j);
               }
-              print(m);
-              print("bachir");
             }
           }
-massegs.sort((a, b) => a.datnow!.compareTo(b.datnow!));        
-    return Column(children: [
+                  massegs.reversed;
+                  print(massegs.length);
+          //ترتيب ليست حسب التاريخ 
+      massegs.sort((a, b) => a.datnow!.compareTo(b.datnow!));        
+         return
+          Column(children: [
            Expanded(child: ListView.builder(
+            // reverse: true,
           itemCount: massegs.length,
           itemBuilder: (context, index) {
-          return   Row( 
-            // add condetion user conection and user send ne massege 
-            mainAxisAlignment: massegs[index].idUser==widget.User!.uid? MainAxisAlignment.end :MainAxisAlignment.start,
-            children:[ Container(
-              margin:const EdgeInsets.only(top: 20),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20*0.75,vertical: 10
-              ),
-              decoration: BoxDecoration(color:massegs[index].idUser==widget.User!.uid? Colors.blue:Colors.white,
-              borderRadius: BorderRadius.circular(30)),
-              child: Column(
-                children: [
-                  Text("${massegs[index].masseg}",style:  TextStyle( 
-                   color:massegs[index].idUser==widget.User!.uid? Colors.white:Colors.black,
-                  ),),
-                  // Text("${snapshot.data!.docs[index]["idChat"]}"),
-                ],
-              ),
-            )]);
-        },)),
+          return   Row(
+            mainAxisAlignment: widget.User!.uid==massegs[index].idUser? MainAxisAlignment.end:MainAxisAlignment.start,
+            children: [
+              //هذا الكنتينر يحتوي على الرسائل سواء كانت صورة اونص 
+              Container(        
+                  margin:const EdgeInsets.all( 5),
+                  padding:  const EdgeInsets.symmetric(
+                  horizontal: 20*0.75,vertical: 5),
+                  // width: 250,
+                  // height: 250,
+                  decoration: BoxDecoration(color:massegs[index].idUser==widget.User!.uid && massegs[index].Taype=="Text"? Colors.blue:Colors.white,
+                  borderRadius: BorderRadius.circular(30)
+
+                  ),
+                   child:
+                   massegsWidge(Addmasseg: Addmasseg).shwoData(massegs[index],this.context),
+                  ),
+            ],
+          ); },)),
           Container(
           padding: const EdgeInsets.symmetric(horizontal: 20,
           vertical: 15,
           ),
           decoration: const BoxDecoration(
-            color: Colors.white,
-          ),
+            color: Colors.white,),
           child:  SafeArea(child: Row(children: [
             const Icon(Icons.mic,
-            color: Colors.black,),
+            color: Colors.blue,),
             const SizedBox(width: 20,),
             Expanded(child: Container(decoration: BoxDecoration(
                 color: const Color.fromARGB(0, 255, 255, 255),
@@ -123,43 +122,55 @@ massegs.sort((a, b) => a.datnow!.compareTo(b.datnow!));
               Form(
                  key:_glonlfey,
                 child: TextFormField(
-                  validator: (value) {
-                    if (value!.isNotEmpty) {
-                      isEmpty=true;
-                    }
-                    return null;
-                  },
-                  onChanged: (sendmessge) {
-                             Addmasseg.masseg= sendmessge;
-                             },
-                  decoration: const InputDecoration(
-                    hintText: "Typ Text", 
-                  border: InputBorder.none
+                  controller: controler,
+                  decoration:  const InputDecoration(
+                    hintText: "Input Massegs", 
+                    border: InputBorder.none,             
                   ),
                 ),
               ),
               ),
               // icon send Message to  user 
                       Visibility(
-                        visible: true,
-                        child: IconButton(onPressed: (){
+                        // visible: !isEmpty,
+                        child: IconButton(
+                          color: Colors.blue,
+                          onPressed: (){
                            if (_glonlfey.currentState!.validate()) {
                              setState(() {
                                 _glonlfey.currentState!.save();
+                                  Addmasseg.masseg= controler.text;
                                 Addmasseg.datnow= DateTime.now();
-                                // Addmasseg.idChat=widget.massg!.id;
-                                  Addmasseg.idusersender=currentUser;
-                                 Addmasseg.idUser=widget.User!.uid;
+                                 Addmasseg.Taype="Text";
+                                //   Addmasseg.idusersender=currentUser;
+                                //  Addmasseg.idUser=widget.User!.uid;
                                  Auth(). addMassge(Addmasseg);  
-                              // HomeModlefirbase().getMasseg(currentUser);
-                              
-                              });
-                                
+                                 });
+                                        controler.clear();
                               }
-                        }, icon: const Icon(Icons.send))),
+                        }, 
+                        
+                        icon: const Icon(Icons.send),
+                            )),
                       //icon uploude to image in galore or camira
-              IconButton(onPressed:(){},
-               icon: const Icon(Icons.camera_alt_outlined))
+                   IconButton(
+                    color: Colors.blue,
+                    onPressed:() async{
+                  image= await uploudimage.pickImage(source: ImageSource.camera);
+                   if (image!=null) {
+                  //  pthimage=image!.path;   
+                  //    Addmasseg.masseg=pthimage;
+                    massegsWidge(Addmasseg: Addmasseg).showimge(image!,this.context); }
+             },
+               icon: const Icon(Icons.camera_alt_outlined)),
+                   IconButton(
+                    color: Colors.blue,
+                    onPressed:() async{
+                            image= await uploudimage.pickImage(source: ImageSource.gallery);
+                   if (image!=null) {
+                     massegsWidge(Addmasseg: Addmasseg).showimge(image!,this.context); }
+                },
+               icon: const Icon(Icons.wallpaper))
             ]),
             ))
           ],)),

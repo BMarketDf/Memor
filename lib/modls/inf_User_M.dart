@@ -41,8 +41,7 @@ class Users {
       "phone": phone,
       "Srvice": Srvice,
       "Username": Username,
-      "imgeurl": imgeurl,
-    };
+      "imgeurl": imgeurl,};
   }
 }
 class Userviwemodle {
