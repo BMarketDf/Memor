@@ -5,28 +5,37 @@ import '../Constent/constent.dart';
 import '../modls/inf_massegs_M.dart';
 import '../modls/srvise/user_serviceFirbase.dart';
 import 'masseg.dart';
-class ShowImge extends StatelessWidget {
+class ShowImge extends StatefulWidget {
      Massegs urlimge;
-     final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
+  
    ShowImge({super.key,required this.urlimge});
+
+  @override
+  State<ShowImge> createState() => _ShowImgeState();
+}
+class _ShowImgeState extends State<ShowImge> {
+     final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
           bool isdelete=false;
                 deletimage(context) async{
-                isdelete=  await Auth().deletMassge(urlimge.id)  ;
-                 if (isdelete) {
-              //        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context) =>  masseg()));
-                     Navigator.pushNamedAndRemoveUntil(context, "/masseg", (route) => false);
-                  Auth().deleteimagrinfirestore(urlimge.masseg);
-                 conste().snakepare("تم حدف الصورة ", context);
+                  //يوجد خطا في هذه الدالة
+                  String deleteUrlImage=widget.urlimge.masseg.toString() ;
+                //  Navigator.pushNamedAndRemoveUntil(context, "/masseg", (route) => false);
+                 Navigator.of(context).pop();
+                isdelete=  await Auth().deletMassge(widget.urlimge.id)  ;
+                  if (isdelete) {
+                 await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                    conste().snakepare("تم حدف الصورة ", context);
                  }else{
-                  print("فشل الحذف ");
-                  conste().snakepare("تعذر حذف الصورة!  ", context);}
-      }
-  @override
+                   print("فشل الحذف ");
+                  conste().snakepare("تعذر حذف الصورة!  ",context);}
+                       }
+
+     @override
       Widget build(BuildContext context) => Scaffold(
        backgroundColor: Colors.black,
        appBar: AppBar( 
        title: Visibility(
-       visible: urlimge.idusersender==currentUser?true:false,
+       visible: widget.urlimge.idusersender==currentUser?true:false,
          child: IconButton(onPressed: (){
               showDialog(
              context:context,
@@ -38,16 +47,13 @@ class ShowImge extends StatelessWidget {
                    children:[
                     TextButton(onPressed: (){
                     Navigator.pop(context);
-                   deletimage(context);
-                // }
-                
+                   deletimage(context);                  //يوجد خطا في هذه الدالة
+
               }, child:const Text("نعم ")),
               TextButton(onPressed: (){
                 Navigator.pop(context);
               }, child:const Text(" لا ")),
-                   ]                    
-                   )
-                ],
+                  ] )  ],
               ) ,
             ));
           }, icon: const Icon(Icons.delete)),
@@ -59,11 +65,11 @@ class ShowImge extends StatelessWidget {
            child: CachedNetworkImage(
                         height: double.maxFinite,
                         width: double.maxFinite,
-                              imageUrl: urlimge.masseg!,
-                              errorWidget: (context, url, error) =>const Center(child:  Text("تم حذف الصورة ")),
-                        placeholder:(context,url)=> Image(image:NetworkImage(url)  ,
-                         fit: BoxFit.cover,
-                                ),
+                          imageUrl: widget.urlimge.masseg!,
+                          errorWidget: (context, url, error) =>const Center(child:  Text("تم حذف الصورة ")),
+                           placeholder:(context,url)=> const Center(child: CircularProgressIndicator()),
+                           imageBuilder: (context, imageProvider) => Image(image: imageProvider,
+                           fit: BoxFit.scaleDown,),
                       ),
          )
     );

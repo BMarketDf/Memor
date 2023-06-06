@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newproject/modls/inf_User_M.dart';
 import 'package:newproject/modls/inf_chat_M.dart';
@@ -35,9 +36,15 @@ class _MasState extends State<Mas> {
                           padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0*0.75),
                              child: Row(children: [
                     Stack(
-                      children:[  CircleAvatar(
-                        radius:25,
-                        backgroundImage:  NetworkImage("${ListUses.imgeurl}"),
+                      children:[  CachedNetworkImage(
+                         imageUrl: ListUses.imgeurl.toString(),
+                         errorWidget: (context, url, error) => const Icon(Icons.person,color: Colors.blue,),
+                         placeholder:(context,url)=> const Icon(Icons.person,color:Colors.blue),
+                           imageBuilder: (context, imageProvider) =>
+                         CircleAvatar(
+                          radius:25,
+                          backgroundImage:imageProvider,
+                        ),
                       ),
                       ///يجي الشرط نتاع اذا كان المستحدم نشط اولا  
                       Positioned(

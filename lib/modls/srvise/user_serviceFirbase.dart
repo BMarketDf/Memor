@@ -261,20 +261,18 @@ class Auth extends abstractuser {
                 var delet =Instencefirbsefirstor.collection("Massegs").doc(idmasseg);
             if(delet!=null){
               await delet.delete();
-              isdelete=true;
+               isdelete=true;
             }
          } catch (e) {}
            return isdelete;
-
            }
-           
              @override
              Future deleteimagrinfirestore(String? pathe)async  {
              try {
                   await FirebaseStorage.instance.ref(pathe).delete();
               // ignore: empty_catches
           } catch (e) {
-        print("non delete imge");
+           print("non delete imge");
        }
              }
 }

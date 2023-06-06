@@ -100,7 +100,7 @@ class massegsWidge{
               default:
                     return InkWell(
                 onTap: (){
-               Navigator.push(context, MaterialPageRoute(builder:(context) 
+               Navigator.push( context, MaterialPageRoute(builder:(context) 
                => ShowImge(urlimge: gettype,)));
                 },
                 child: ClipRRect(
@@ -109,9 +109,10 @@ class massegsWidge{
                     width: 180,
                     // height: 600,
                       imageUrl: gettype.masseg.toString(),
-                    placeholder:(context,url)=> Image(image: NetworkImage("${url}") ,
-                       fit: BoxFit.cover,
-                           ),
+                    placeholder:(context,url)=> const Center(child: CircularProgressIndicator()),
+                           imageBuilder: (context, imageProvider) =>Image(image: imageProvider,
+                            fit: BoxFit.scaleDown,
+                           ), 
                   ),
                 ),
               );
