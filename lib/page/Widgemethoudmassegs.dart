@@ -44,9 +44,9 @@ class massegsWidge{
                 String deleteUrlImage=remove.masseg.toString() ;
               isdelete=await Auth().deletMassge(remove.id)  ;
                   if (isdelete) {
-                     Navigator.pop(context);
                     conste().snakepare("تم حدف الصورة ", context); 
                     await  Auth().deleteimagrinfirestore(deleteUrlImage);
+                       Navigator.pop(context);
                   }
                  else{conste().snakepare("تعذر حذف الصورة!  ",context);}}
          ///رفع الصورة كمن الكاميرا او المعرض 
