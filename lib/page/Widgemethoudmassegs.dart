@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +50,10 @@ class massegsWidge{
                   }
                  else{conste().snakepare("تعذر حذف الصورة!  ",context);}}
          ///رفع الصورة كمن الكاميرا او المعرض 
-          Uploudfile(XFile image)async {
+            Uploudfile(XFile image)async {
               File file =File(image.path);
-              String nameimage=basename(image.path);
+              int random=Random().nextInt(1000000);//hda drto bache nivety tkrar ism image exmple ida tsouira talait 2 marat matoudch idhem nafce lisme 
+              String nameimage=basename(image.path)+random.toString();
               var refrehce=FirebaseStorage.instance.ref("imagaeChatMassegs/$nameimage");
               Addmasseg.Taype="Image";
               Addmasseg.datnow= DateTime.now();      
