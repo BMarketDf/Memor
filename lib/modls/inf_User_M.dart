@@ -27,6 +27,7 @@ class Users {
     uid = json!["uid"];
     Date = json["Date"];
     address = json["address"];
+    email = json["email"];
     phone = json["phone"];
     Srvice = json["Service"];
     Username = json["Username"];
@@ -37,6 +38,7 @@ class Users {
     return {
       "uid": uid,
       "Date": Date,
+      "email": email,
       "address": address,
       "phone": phone,
       "Srvice": Srvice,

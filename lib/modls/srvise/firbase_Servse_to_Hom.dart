@@ -1,8 +1,12 @@
+import 'dart:developer';
+
+import 'package:get/get.dart';
 import 'package:newproject/modls/Repostre_Apstract/abstract_Servse_to_Homfirbase.dart';
 import 'package:newproject/modls/Repostre_Apstract/abstract_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:newproject/modls/inf_Ratings_M.dart';
 import 'package:newproject/modls/inf_Reviews_M.dart';
+import 'package:newproject/modls/inf_User_M.dart';
 import 'package:newproject/modls/inf_massegs_M.dart';
 
 import '../inf_Srvice_M.dart';
@@ -48,8 +52,7 @@ try {
       }
  });
 
-
-  if (doc.length!=0) {
+  if (doc.isNotEmpty) {
          Moyne=toutaleRating/doc.length;
          print(Moyne);
 }
@@ -59,21 +62,61 @@ try {
       return Moyne;  
   }
   
-  @override
-  Future getMasseg(String id)async  {
-       List massegs=[];
-try{
-// int length= await constent.collection("Users").doc(id).collection("Massegs").snapshots().length;
-//     m.forEach((element) { 
-//                  print("dddddddd");
-//        for (var element in element.docs) {
-//          massegs.add(Massegs.fromjson(element.data()));
-
-//        }
-//     });
   
+  @override
+  // ignore: non_constant_identifier_names
+ Future getSearche(String query,String isSlected) async {
+  List<Srvices> resultSearch = [];
+  try {
+   QuerySnapshot<Map<String, dynamic>> resoult ; 
+     if(query.isNotEmpty){
+      switch (isSlected) {
+        case "الاكثر تقييما":
+         resoult= await constent.collection("Services").orderBy("Raitin",descending: true).get();
+          break;
+          case "الاكثر تفاعلا":               
+            resoult= await constent.collection("Services").orderBy("Count",descending:true).get();
+          break;
+        default:
+      resoult= await constent.collection("Services").get();
+      } 
+          for (int element=0; element<resoult.docs.length;element++) {
+              if (resoult.docs[element].data()["description"].toString().toLowerCase().contains(query.toLowerCase())
+              || resoult.docs[element].data()["title"].toString().toLowerCase().contains(query.toLowerCase())) 
+              {
+                 resultSearch.add(Srvices.fromjson(resoult.docs[element].data()));
+               }
+              }
+              
+             if(isSlected=="تاريخ النشر"){
+             resultSearch.sort((a, b) => b.createDate!.compareTo(a.createDate!));  
+             }
+             }
+        return resultSearch;
+  }on  FirebaseException catch (e) {
+    print(e);
   }
-catch (e) {}
+}
 
-  }}
+  @override
+  Future getSearcheUser(String qure)async  {
+     List<Users> resultSearch = [];
+  try {
+       await constent.collection("Users").get().then((value){
+        for (int element=0; element<value.docs.length;element++) {
+              if (value.docs[element].data()["Username"].toString().toLowerCase().contains(qure.toLowerCase())
+              || value.docs[element].data()["email"].toString().toLowerCase().contains(qure.toLowerCase())
+              ) {
+                 resultSearch.add(Users.fromjson(value.docs[element].data()));
+             }}
+                });
+        return resultSearch;
+  }on  FirebaseException catch (e) {
+    print(e);
+  }
 
+  }
+
+    
+
+}

@@ -28,8 +28,5 @@ class _ShowImgeState extends State<ShowImge> {
                           errorWidget: (context, url, error) =>const Center(child:  Text("تم حذف الصورة ")),
                            placeholder:(context,url)=> const Center(child: CircularProgressIndicator()),
                            imageBuilder: (context, imageProvider) => Image(image: imageProvider,
-                           fit: BoxFit.scaleDown,),
-                      ),
-         )
-    );
+                           fit: BoxFit.scaleDown,),),));
 }

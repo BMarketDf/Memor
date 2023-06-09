@@ -6,6 +6,8 @@ import '../view_modle/porofail_VM.dart';
 // ignore: depend_on_referenced_packages
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+import 'SearchDelegate.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -14,9 +16,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
   homeviwemodle homes = homeviwemodle(abstrecthome: HomeModlefirbase());
   String? userid;
   profaile_vm user = profaile_vm(Abstractuser: Auth());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   Widget getuseraddservice(String userid) {
     return FutureBuilder(
       future: user.getpe(userid),
@@ -27,6 +35,7 @@ class _HomeState extends State<Home> {
               )
             : Row(
                 children: [
+
                   Column(
                     children: [
                       CircleAvatar(
@@ -59,9 +68,20 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Home page"),
+       actions: <Widget>[
+        IconButton(onPressed: (){
+          setState(() {
+      showSearch(context: context, delegate: Serche());
+          });
+          }, icon: const Icon(Icons.search)),
+        
+       ],
+      ),
       body: StreamBuilder(
           stream: Connectivity().onConnectivityChanged,
           builder: (context, snapshot) {
+        
             return snapshot.data == ConnectivityResult.none
                 ? const Center(
                     child: Text("plese check your internt connection"))

@@ -95,7 +95,7 @@ class Auth extends abstractuser {
     try {
       //cathe().cercoularindecatercenter(context);
       rsponce = await Instencefirbsefirstor.collection("Services").doc();
-      infSrvice.Id=rsponce!.id;
+      infSrvice.serviceuid=rsponce!.id;
        rsponce!.set(infSrvice.tojson());
         ref =true; 
 
@@ -205,7 +205,7 @@ class Auth extends abstractuser {
   Future<bool> UpdaetService(Srvices service)async { 
    bool ret =false ;
       try {
-                 DocumentReference  Updaet= await Instencefirbsefirstor.collection("Services").doc(service.Id);
+                 DocumentReference  Updaet= await Instencefirbsefirstor.collection("Services").doc(service.serviceuid);
                 Updaet.update(service.tojson());
                                   ret=true;
       } catch (e) {

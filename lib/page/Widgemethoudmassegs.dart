@@ -21,7 +21,6 @@ class massegsWidge{
          final String currentUser = FirebaseAuth.instance.currentUser!.email.toString();
          Massegs Addmasseg =Massegs();
          massegsWidge({required this.Addmasseg});
- 
    allertSyalouug(context,Massegs geTaype){
     showDialog(
              context:context,
@@ -93,8 +92,8 @@ class massegsWidge{
 
               return GestureDetector(
    
-                child: Text("${gettype.masseg}",style:  const TextStyle( 
-                             color: Color.fromARGB(255, 236, 228, 228),
+                     child: Text("${gettype.masseg}",style:   TextStyle( 
+                             color:  currentUser==gettype.idusersender? Color.fromARGB(255, 236, 228, 228):Colors.black,
                       ),),
                                         onLongPress: (){
                 if (currentUser==gettype.idusersender) {
@@ -115,18 +114,9 @@ class massegsWidge{
                 Navigator.pop(context);
               },
                  child:const Text(" لا ")), ])  ],), ));
-                 } 
-                 }  
-             
-                      );
-     
-          ///if loula tkmle hna 
-              // else {
-              //     return Text("${gettype.masseg}",style: const  TextStyle( 
-              //                        color:Colors.black,),); 
-              //                        }
-                
-                              default:
+                 } }   );
+  
+                      default:
                     return GestureDetector(
                       onLongPress: () {
                     if (currentUser==gettype.idusersender) {  allertSyalouug(context,gettype);  } },

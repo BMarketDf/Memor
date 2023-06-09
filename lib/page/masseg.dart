@@ -40,6 +40,8 @@ class _massegState extends State<masseg> {
             setState(() {  isEmpty= controler.text.isEmpty;});
              Addmasseg.idusersender=currentUser;
              Addmasseg.idUser=widget.User!.uid;
+           //  Addmasseg.idusersender=currentUser;
+                                //  Addmasseg.idUser=widget.User!.uid;
               super.initState();
                }
    Widget Chatinputfiled(){
@@ -142,8 +144,8 @@ class _massegState extends State<masseg> {
                              setState(() {
                                 _glonlfey.currentState!.save();
                                   Addmasseg.masseg= controler.text;
-                                Addmasseg.datnow= DateTime.now();
-                                 Addmasseg.Taype="Text";
+                                  Addmasseg.datnow= DateTime.now();
+                                   Addmasseg.Taype="Text";
                                 //   Addmasseg.idusersender=currentUser;
                                 //  Addmasseg.idUser=widget.User!.uid;
                                  Auth(). addMassge(Addmasseg);  
