@@ -23,10 +23,11 @@ class Serche extends SearchDelegate{
         }, icon:const  Icon(Icons.arrow_back));}
     @override
    Widget buildResults(BuildContext context) {
-    return serchedelog(Typeserche: false,SlectService:SlectService,query:query ,);
+    return serchedelog(Typeserche: false,SlectService:SlectService,query:query ,IsSlected: IsSlected,);
          }
   @override
   Widget buildSuggestions(BuildContext context) {
     return serchedelog(IsSlected:IsSlected,Typeserche: true,);
-    // Home(IsSlected: IsSlected,);
+    // Home(IsSlected: IsSlected,
+    // );
   }}
