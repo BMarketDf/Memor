@@ -17,7 +17,7 @@ class serchedelog extends StatefulWidget {
  class _Serche extends State<serchedelog> {
  HomeModlefirbase serche=HomeModlefirbase();
   List<String> Listselcted=["Users","Service","All"];
- List<String> Tupeserchservice=["تاريخ النشر","الاكثر تقييما","الاكثر تفاعلا"];
+  List<String> Tupeserchservice=["تاريخ النشر","الاكثر تقييما","الاكثر تفاعلا"];
   // Widget getsearchorderby(String IsSlected2){
   //  return ListView.builder(
   //      itemCount: Listselcted2.length,
@@ -34,6 +34,7 @@ class serchedelog extends StatefulWidget {
   // }
   //fonction get slected 
   Widget getslected(){
+    //هذه الدالة نتاع يخير وش حاب يريشارشي نتاع سرفيس ولا المستخدم ومزال نقصتها خدما 
      return ListView.builder(
        itemCount: Listselcted.length,
       scrollDirection: Axis.horizontal,
@@ -48,6 +49,7 @@ class serchedelog extends StatefulWidget {
             });})],), ]);});
   }
    Widget getservis(){
+    //بحث ب الخدمات 
    return  Column(
      children: [
       Expanded(
@@ -63,7 +65,7 @@ class serchedelog extends StatefulWidget {
                 setState(() {
                    widget.SlectService=val!;
                    print(widget.SlectService);
-                   print("////////////");
+                   print("////////////");//هنا راني داير سات  ستيت بصح مخدمتش الخدمة نتعها 
                    print(val);
                 }); 
                 }) ], ),

@@ -45,6 +45,7 @@ try {
    List<DocumentSnapshot> doc=[];
          double toutaleRating=0;
  try {
+     await constent.collection("Ratings").doc(userid).delete();
     await constent.collection("Ratings").where("userid",isEqualTo: userid).get().then((QuerySnapshot MoyanRating) {
   doc=MoyanRating.docs;
       for (var i = 0; i < doc.length; i++) {
@@ -77,8 +78,8 @@ try {
           case "الاكثر تفاعلا":               
             resoult= await constent.collection("Services").orderBy("Count",descending:true).get();
           break;
-        default:
-      resoult= await constent.collection("Services").get();
+          default:
+        resoult= await constent.collection("Services").get();
       } 
           for (int element=0; element<resoult.docs.length;element++) {
               if (resoult.docs[element].data()["description"].toString().toLowerCase().contains(query.toLowerCase())
@@ -86,9 +87,9 @@ try {
               {
                  resultSearch.add(Srvices.fromjson(resoult.docs[element].data()));
                }
-              }
-              
+              } 
              if(isSlected=="تاريخ النشر"){
+              //ترتيب البحث حسب التاريخ  
              resultSearch.sort((a, b) => b.createDate!.compareTo(a.createDate!));  
              }
              }
